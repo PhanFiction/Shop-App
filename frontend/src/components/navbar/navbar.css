@@ -1,0 +1,18 @@
+.navbar {
+  align-items: center;
+}
+
+.navbar li {
+  font-size: 2em;
+  font-style: normal;
+}
+
+.MuiAppBar-colorPrimary {
+  color: white;
+  background-color: white !important;
+}
+
+.MuiLink-root {
+  margin-left: 1em !important;
+  margin-right: 1em !important;
+}

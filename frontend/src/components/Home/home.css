@@ -1,0 +1,126 @@
+.imageBox {
+  width: auto;
+  height: 700px;
+}
+
+.imageBox > .img1 {
+  object-fit: cover;
+}
+
+.imageBox > .img2 {
+  max-width: 65%;
+  margin-left: 20%;
+}
+
+.section-box {
+  max-width: 100%;
+}
+
+.section-box > .box1 {
+  width: 75%;
+  margin-left: 20%;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-container2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardBox {
+  width: 175px;
+  height: auto;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cardBox > .cardMedia {
+  height: 150px;
+}
+
+.textHover {
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.cardBox:hover .textHover {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.span-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.spaceAround {
+  justify-content: space-around;
+  position: relative;
+  left: -5%;
+}
+
+.center {
+  top: 25%;
+  position: relative;
+  justify-content: space-evenly;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("http://localhost:3002/images/bg_4.jpg"),
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
+  background-blend-mode: overlay;
+
+  /* Full height */
+  height: 304px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax2 {
+  /* The image used */
+  background-image: url("http://localhost:3002/images/bg_5.jpg"),
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+  background-blend-mode: overlay;
+
+  /* Full height */
+  height: auto;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.counter {
+  display: block;
+  color: white;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.overrideBox {
+  color: white !important;
+  letter-spacing: 0 !important;
+}
+
+.userBox {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.footerContainer {
+  background-color: black;
+  color: white;
+}
