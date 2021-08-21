@@ -1,4 +1,4 @@
 /**
- * 1. install bcrypt and json webtoken
+ * 1. install bcrypt and json webtoken to make transaction
  * 
  */

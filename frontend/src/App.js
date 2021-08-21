@@ -1,19 +1,19 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Navbar from './components/navbar/Navbar.js';
 import Home from './components/Home/Home.js';
 import Menu from './components/Menu/Menu.js';
+import Page from './components/Page/Page.js';
 
 
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Navbar/>
-        <Route exact path="/"><Home/></Route>
-        <Route path="/menu"><Menu/></Route>
-      </BrowserRouter>
+      <Navbar/>
+      <Route exact path="/"><Home/></Route>
+      <Route exact path="/menu"><Menu/></Route>
+      <Route path="/menu/breakfast"><Page/></Route>
     </div>
   );
 }
