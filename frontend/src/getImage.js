@@ -1,7 +1,7 @@
-const STATIC_IMG_PATH = process.env.REACT_APP_FOOD_IMG_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const getImage = (imgName) => {
-    return `${STATIC_IMG_PATH}/${imgName}.jpg`;
+    return `${BASE_URL}${imgName}.jpg`;
 }
 
 export default getImage;

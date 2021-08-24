@@ -1,41 +1,27 @@
 const axios = require('axios');
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-
-const getBreakfast= async () => {
-    const response = await axios.getLunch(`${BASE_URL}/products/breakfast`);
+/**
+ * 
+ * @param {category} food category 
+ * @returns a list of all food category 
+ */
+const getCategory = async (category) => {
+    const response = await axios.get(`${BASE_URL}/menu/${category}`);
     return response.data;
 }
 
-
-const getLunch = async () => {
-    const response = await axios.getLunch(`${BASE_URL}/products/lunch`);
+/**
+ * @param {foodType} foodType 
+ * @param {id} id
+ * @returns returns the specific item of a food 
+ */
+const getFoodID = async (foodType, id) => {
+    const response = await axios.get(`${BASE_URL}/menu/${foodType}/:${id}`);
     return response.data;
 }
-
-
-const getDinner = async () => {
-    const response = await axios.getLunch(`${BASE_URL}/products/dinner`);
-    return response.data;
-}
-
-
-const getDrinks = async () => {
-    const response = await axios.getLunch(`${BASE_URL}/products/drinks`);
-    return response.data;
-}
-
-
-const getDessert = async () => {
-    const response = await axios.getLunch(`${BASE_URL}/products/dessert`);
-    return response.data;
-}
-
 
 module.exports = {
-    getBreakfast,
-    getLunch,
-    getDinner,
-    getDrinks,
-    getDessert,
+    getCategory,
+    getFoodID,
 }

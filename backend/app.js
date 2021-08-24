@@ -35,11 +35,11 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/products/breakfast', breakfastRouter);
-app.use('/products/lunch', lunchRouter);
-app.use('/products/dinner', dinnerRouter);
-app.use('/products/desserts', dessertsRouter);
-app.use('/products/drinks', drinksRouter);
+app.use('/menu/breakfast', breakfastRouter);
+app.use('/menu/lunch', lunchRouter);
+app.use('/menu/dinner', dinnerRouter);
+app.use('/menu/desserts', dessertsRouter);
+app.use('/menu/drinks', drinksRouter);
 
 //importData();
 

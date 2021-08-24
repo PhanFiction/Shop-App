@@ -2,11 +2,9 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import getImage from '../../../getImage.js';
-import {Link as RouterLink, useRouteMatch} from 'react-router-dom';
-import Link from '@material-ui/core/Link';
+
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -41,33 +39,23 @@ const useStyles = makeStyles({
     }
 })
 
-const endPointType = {
-    breakfast: 'breakfast',
-    lunch: 'lunch',
-    dinner: 'dinner',
-    dessert: 'dessert',
-    drinks: 'drinks',
-}
 
 /**
  * 
  * @param {props} props 
- * @returns takes in endpoint, spacing of box, food name image, type of meal (breakfast, lunch, etc)
+ * @returns Grid spacing of box, food name image
  */
-export default function Food(props)
+export default function FoodCard(props)
 {
     const classes = useStyles();
-    let match = useRouteMatch();
-    let endPoint = endPointType[props.ep];
+
     return(
-        <Grid item xs={props.space}>
+        <Grid item xs={12} sm={12} md={4} lg={4}>
             <Card>
                 <CardContent className={`${classes.card}`}>
                     <CardMedia image={getImage(props.foodNameImage)} className={classes.media}>
                         <div className={`${classes.overlay} ${classes.center} ${classes.hover} ${classes.colorPrimary}`}>
-                            <Link component={RouterLink} to={`${match.url}/${endPoint}`}> 
-                                <Typography variant="h2" align="center">{props.title}</Typography>  
-                            </Link>
+                            {props.children}
                         </div>
                     </CardMedia>
                 </CardContent>
