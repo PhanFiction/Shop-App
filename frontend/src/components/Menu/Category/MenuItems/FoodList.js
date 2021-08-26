@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import food from '../../../../service/food.js';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import ParallaxBG from '../../parallax/Parallax.js';
 import getImage from '../../../../getImage.js';
 import FoodCard from '../FoodCard.js';
 import {Link as RouterLink, useRouteMatch} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
-import Food from './Food.js';
+
 
 const userStyles = makeStyles({
     center: {
@@ -29,7 +29,6 @@ const userStyles = makeStyles({
 export default function Items(props)
 {
     const [items, setCategory] = useState('');
-    const [itemId, setId] = useState(null);
     const classes = userStyles();
     const match = useRouteMatch();
 

@@ -43,7 +43,7 @@ const useStyles = makeStyles({
 /**
  * 
  * @param {props} props 
- * @returns Grid spacing of box, food name image
+ * @returns food name image
  */
 export default function FoodCard(props)
 {
