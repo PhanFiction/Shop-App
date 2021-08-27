@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        minLength: [5, 'Must provide a minimum of 5 letters'],
+        unique: true,
     },
     name: {
         type: String,
@@ -11,9 +14,12 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Please provide a password'],
+        minLength: [5, 'password needs to have length of 3']
     }
 })
+
+userSchema.plugin(uniqueValidator);
 
 // removes the _id and replace it with id
 userSchema.set('toJSON', {

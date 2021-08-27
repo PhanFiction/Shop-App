@@ -62,14 +62,17 @@ export default function Food()
 
     // submit to the cart
     const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('click');
         return null;
     }
 
     // change value
     const handleChange = (event) => {
         setQuantity(event.target.value);
-        console.log(event.target.value);
     }
+
+    console.log(item);
     
     return(
         <>
@@ -81,8 +84,7 @@ export default function Food()
                         <Grid item xs={12} sm={12} md={6}>
                             <Card>
                                 <CardContent className={`${classes.card}`}>
-                                    <CardMedia image={getImage(item.imageUrl.slice(0, item.imageUrl.length-4))} className={classes.media}>
-                                        
+                                    <CardMedia image={getImage(item.meal.imageUrl.slice(0, item.meal.imageUrl.length-4))} className={classes.media}>                                       
                                     </CardMedia>
                                 </CardContent>
                             </Card>
@@ -90,10 +92,10 @@ export default function Food()
                         {/*Button to add item to cart, quality, and */}
                         <Grid item xs={12} sm={12} md={6}>
                             <Grid item xs={12} sm={12} md={12}>
-                                <Typography variant="h5">{`Name: ${item.name}`}</Typography>
+                                <Typography variant="h5">{`Name: ${item.meal.name}`}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} className={classes.space}>
-                                <Typography variant="h5">{`Price: ${item.price}$`}</Typography>
+                                <Typography variant="h5">{`Price: ${item.meal.price}$`}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} className={classes.space}>
                                 <Form handleSubmit={handleSubmit} value={quantity} handleChange={handleChange}/>

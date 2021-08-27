@@ -42,6 +42,7 @@ export default function Items(props)
         
     },[props.category]);
 
+    console.log(items);
 
     return(
         <>
@@ -63,15 +64,15 @@ export default function Items(props)
         <Grid container justifyContent="center" alignItems="center" className={classes.wrapper}>
                 <Grid container spacing={8}>
                     {
-                        items.length !== 0 ? 
-                        items.map(item => 
-                            <FoodCard key={item.id} foodNameImage={item.imageUrl.slice(0, item.imageUrl.length-4)}>
-                                <Link component={RouterLink} to={`${match.url}/${item.id}`}>
-                                    <Typography variant="h4" align="center">{item.name}</Typography>
-                                </Link>
-                            </FoodCard>
-                        ):
-                        <></>
+                    items.length !== 0 ? 
+                    items.meal.map(item => 
+                        <FoodCard key={item.id} foodNameImage={item.imageUrl.slice(0, item.imageUrl.length-4)}>
+                            <Link component={RouterLink} to={`${match.url}/${item.id}`}>
+                                <Typography variant="h4" align="center">{item.name}</Typography>
+                            </Link>
+                        </FoodCard>
+                    ):
+                    <></>
                     }
                 </Grid>
             </Grid>

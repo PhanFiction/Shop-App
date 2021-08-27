@@ -3,11 +3,7 @@ const config = require('./utils/config.js');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const breakfastRouter = require('./controllers/breakfast.js');
-const lunchRouter = require('./controllers/lunch.js');
-const dinnerRouter = require('./controllers/dinner.js');
-const dessertsRouter = require('./controllers/desserts.js');
-const drinksRouter = require('./controllers/drinks.js');
+const categoryRouter = require('./routes/category.js');
 const path = require('path');
 //const importData = require('./importingData/importData.js');
 
@@ -35,12 +31,7 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/menu/breakfast', breakfastRouter);
-app.use('/menu/lunch', lunchRouter);
-app.use('/menu/dinner', dinnerRouter);
-app.use('/menu/desserts', dessertsRouter);
-app.use('/menu/drinks', drinksRouter);
-
+app.use('/menu', categoryRouter);
 //importData();
 
 module.exports = app;
