@@ -12,10 +12,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: {
+    passwordHash: {
         type: String,
         required: [true, 'Please provide a password'],
-        minLength: [5, 'password needs to have length of 3']
+        minLength: [5, 'password needs to have length of 5']
     }
 })
 

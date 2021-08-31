@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const foodSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     price: {
         type: Number,
@@ -11,14 +13,15 @@ const foodSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Drinks'],
+        enum: ['breakfast', 'lunch', 'dinner', 'dessert', 'drinks'],
         required: true
     },
-    imageUrl: {
+    productImage: {
         type: String,
-        required: true,
     }
 })
+
+foodSchema.plugin(uniqueValidator);
 
 foodSchema.set('toJSON', {
     transform: (document, returnedObject) => { // transform to string to be safe even though we use res.JSON

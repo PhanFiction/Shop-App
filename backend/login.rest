@@ -1,0 +1,28 @@
+POST http://localhost:3002/api/login
+Content-Type: application/json
+
+{
+  "username": "Alexer000",
+  "password": "Alexer"
+}
+
+###
+POST http://localhost:3002/api/register
+Content-Type: application/json
+
+{
+  "username": "Alexer000",
+  "name": "Alex",
+  "password": "Alexer000"
+}
+
+### 
+POST http://localhost:3002/menu/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsZXhlcjAwMCIsImlkIjoiNjEyYWUxM2E4MzZhMmYyMjE4NjA1M2UyIiwiaWF0IjoxNjMwMjA4ODg5fQ.edvf-OX-O5B7eu_eM6ZeZiDTkV-aivoVq1VOERxuJKY
+
+{
+  "name": "Ice cream sandwich2",
+  "price": 4.5,
+  "category": "dessert"
+}
