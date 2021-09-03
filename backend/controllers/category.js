@@ -1,14 +1,6 @@
 const Food = require('../models/food.js');
 const jwt = require('jsonwebtoken');
 
-//extract bearer token from request of user
-const tokenExtractor = (req) => {
-    if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') 
-    {
-        return req.headers.authorization.split(' ')[1];
-    }
-    return null;
-}
 
 exports.getAllItems = async (req, res) => {
     const products = await Food.find({});
@@ -53,9 +45,7 @@ exports.getFood = async(req, res) => {
     res.json(product);
 }
 
-/**
- * if user is logged in, they can edit, add, delete, product from the database.
- */
+// if user is logged in, they can edit, add, delete, product from the database.
 exports.postItem = async (req, res) => {
     const body = req.body;
 
@@ -63,7 +53,7 @@ exports.postItem = async (req, res) => {
 
     req.file === undefined ? filePath : filePath=req.file.path; // file path uknownn handler
 
-    const token = await tokenExtractor(req); // extract token from body;
+    const token = req.token; // extract token from body;
     
     const decodedToken = jwt.verify(token, process.env.SECRET); // verify token
 
@@ -74,7 +64,6 @@ exports.postItem = async (req, res) => {
     }); */
 
     if (!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });
-    
 
     const product = new Food({
         name: body.name,
@@ -97,7 +86,7 @@ exports.updateItem = async(req, res) => {
 
     const body = req.body;
 
-    const token = await tokenExtractor(req); 
+    const token = req.token;
     
     const decodedToken = jwt.verify(token, process.env.SECRET); 
 
@@ -113,27 +102,26 @@ exports.updateItem = async(req, res) => {
     const updateItem = await Food.findByIdAndUpdate(req.params.id, product, {new: true});
 
     res.json(updateItem);
-
 }
 
+// remove product item from page if they have authorization
 exports.deleteItem = async(req, res) => {
     const id = req.params.id;
 
-    const token = await tokenExtractor(req); 
+    const token = req.token;
     
     const decodedToken = jwt.verify(token, process.env.SECRET); 
 
     if(!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });
 
     try{
+        
         await Food.findByIdAndDelete(id);
-        res.status(204).end();
+        res.status(204).json({message: "deleted item successfully"});
 
     }catch(error){
         
         return res.status(401).toJSON({error: "Unauthorized to delete this product"});
     }
-
-
 }
 

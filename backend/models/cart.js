@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const itemSchema = new Schema({
+const itemSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
+    },
+    name: {
+        type: String,
+        required: true,
     },
     quantity: {
         type: Number,
@@ -19,35 +23,34 @@ const itemSchema = new Schema({
         type: Number,
         required: true,
     }
-});
+},{ _id : false });
 
 itemSchema.plugin(uniqueValidator);
 
-itemSchema.set('toJSON', {
-    transform: (document, returnedObject) => { // transform to string to be safe even though we use res.JSON
+/* itemSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
         delete returnedObject.__v
     }
-})
+}) */
 
-const cartSchema = new Schema({
-    items: [ItemSchema],
+
+const cartSchema = new mongoose.Schema({
+    items: [itemSchema],
     subTotal: {
         default: 0,
         type: Number
     }
 });
 
-cartSchema.plugin(uniqueValidator)
-
-cartSchema.set('toJSON', {
-    transform: (document, returnedObject) => { // transform to string to be safe even though we use res.JSON
+/* cartSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
         delete returnedObject.__v
     }
-})
+}) */
 
 
-module.exports = mongoose.model('cart', CartSchema);
+module.exports = mongoose.model('Cart', cartSchema);
