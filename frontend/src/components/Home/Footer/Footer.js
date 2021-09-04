@@ -94,7 +94,6 @@ export default function Footer(props)
                                 </Grid>
                             </Grid>
                         </Grid>
-
                 </Grid>
             </Container>
         </footer>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Form from '../../../Button/Form.js';
 import food from '../../../../service/food.js';
+import cart from '../../../../service/cart.js';
 import { useParams, useRouteMatch } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -46,9 +47,7 @@ export default function Food()
     const categoryPath = useRouteMatch();
     const categoryType = categoryPath.path.slice(6, categoryPath.path.length-4);
 
-    // React hooks
     const [item, setItem] = useState('');
-    const [price, setPrice] = useState(0);
     const [quantity, setQuantity] = useState(1);
     
 
@@ -71,8 +70,6 @@ export default function Food()
     const handleChange = (event) => {
         setQuantity(event.target.value);
     }
-
-    console.log(item);
     
     return(
         <>
@@ -84,7 +81,7 @@ export default function Food()
                         <Grid item xs={12} sm={12} md={6}>
                             <Card>
                                 <CardContent className={`${classes.card}`}>
-                                    <CardMedia image={getImage(item.meal.imageUrl.slice(0, item.meal.imageUrl.length-4))} className={classes.media}>                                       
+                                    <CardMedia image={getImage(item.productImage)} className={classes.media}>                                       
                                     </CardMedia>
                                 </CardContent>
                             </Card>
@@ -92,10 +89,10 @@ export default function Food()
                         {/*Button to add item to cart, quality, and */}
                         <Grid item xs={12} sm={12} md={6}>
                             <Grid item xs={12} sm={12} md={12}>
-                                <Typography variant="h5">{`Name: ${item.meal.name}`}</Typography>
+                                <Typography variant="h5">{`Name: ${item.name}`}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} className={classes.space}>
-                                <Typography variant="h5">{`Price: ${item.meal.price}$`}</Typography>
+                                <Typography variant="h5">{`Price: ${item.price}$`}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} className={classes.space}>
                                 <Form handleSubmit={handleSubmit} value={quantity} handleChange={handleChange}/>

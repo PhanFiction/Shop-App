@@ -13,35 +13,35 @@ const categories = [
     {
         title: "Breakfast",
         space: 4,
-        foodNameImage: "/images/breakfast-9",
+        foodNameImage: "images/breakfast-9.jpg",
         link: <Link component={RouterLink} to='menu/breakfast'><Typography variant="h3" align="center">Breakfast</Typography></Link>,
         id: 1,
     },
     {
         title: "Lunch",
         space: 4,
-        foodNameImage: "/images/lunch-6",
+        foodNameImage: "images/lunch-6.jpg",
         link: <Link component={RouterLink} to='menu/lunch'><Typography variant="h3" align="center">Lunch</Typography></Link>,
         id: 2,
     },
     {
         title: "Dinner",
         space: 4,
-        foodNameImage: "/images/dinner-1",
+        foodNameImage: "images/dinner-1.jpg",
         link: <Link component={RouterLink} to='menu/dinner'><Typography variant="h3" align="center">Dinner</Typography></Link>,
         id: 3,
     },
     {
         title: "Dessert",
         space: 6,
-        foodNameImage: "/images/dessert-2",
+        foodNameImage: "images/dessert-2.jpg",
         link: <Link component={RouterLink} to='menu/dessert'><Typography variant="h3" align="center">Dessert</Typography></Link>,
         id: 4,
     },
     {
         title: "Drinks",
         space: 6,
-        foodNameImage: "/images/drink-4",
+        foodNameImage: "images/drink-4.jpg",
         link: <Link component={RouterLink} to='menu/drinks'><Typography variant="h3" align="center">Drinks</Typography></Link>,
         id: 5,
     }
@@ -66,7 +66,7 @@ export default function Menu()
         <>
             <Grid container>
                 <Grid item xs={12}>
-                    <ParallaxBG bg={getImage('/images/bg_4')}>
+                    <ParallaxBG bg={getImage('images/bg_4.jpg')}>
                         <Grid container direction="row" justifyContent="center" alignItems="center">
                             <Grid item xs={3}>
                                 <Box className={classes.center}>
@@ -96,7 +96,6 @@ export default function Menu()
                             </FoodCard>
                         )}
                     </Grid>
-                    
                 </Grid>  
             </Grid>
         </>

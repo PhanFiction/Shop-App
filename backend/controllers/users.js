@@ -46,10 +46,9 @@ exports.createAccount = async (req, res) => {
     } 
 }
 
-
 // fetch a list of users in the database
 exports.getUsers = async (req, res) => {
-    const user = await User.find({}) //.populate('user', {username: 1, user: 1});
+    const user = await User.find({}).populate('cart');
     res.json(user);
 }
 

@@ -16,7 +16,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a password'],
         minLength: [5, 'password needs to have length of 5']
-    }
+    },
+    purchaseHistory: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cart"
+        }
+    ]
 })
 
 userSchema.plugin(uniqueValidator);

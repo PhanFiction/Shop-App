@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const itemSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        ref: "Food",
     },
     name: {
         type: String,
@@ -41,6 +41,10 @@ const cartSchema = new mongoose.Schema({
     subTotal: {
         default: 0,
         type: Number
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 

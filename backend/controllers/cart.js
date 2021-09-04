@@ -1,7 +1,7 @@
 const Cart = require('../models/cart.js');
 const Food = require('../models/food.js');
 const jwt = require('jsonwebtoken');
-const { get } = require('mongoose');
+const User = require('../models/user.js');
 
 // fetch items from the cart
 const getCart = async () => {
@@ -14,11 +14,16 @@ const getCart = async () => {
 // contains only two items in the cart array. The subtotal and the items array which holds the object of items
 exports.handleItemsInCart = async (req, res) => {
 
+    const id = req.user;
+
+    const user = await User.findById(id);
+
     const body = req.body;
-    const cart = await getCart();
+
+    const cart = await Cart.findOne({user});
 
     let productInfo = await Food.findById(body.productId)// get product info
-    console.log(body.productId);
+    //console.log(body.productId);
 
     if(!productInfo) return res.status(500).send({type: "not found", message: "invalid request"});
 
@@ -32,16 +37,16 @@ exports.handleItemsInCart = async (req, res) => {
         total: body.quantity * productInfo.price,
     }
 
-    if(cart)
+    if(!user) return res.json({message: "need to be signed in"});
+
+    if(cart && user)
     {
         const indexFound = cart.items.findIndex(item => item.productId.toString() === body.productId);
-        console.log(body.productId); 
-        console.log(indexFound);
 
         // set the cart amount to 0 if there is no items in the cart
         if(indexFound !== -1 && body.quantity <= 0)
         {
-            console.log('item quantity is 0');
+            //console.log('item quantity is 0');
 
             cart.items.splice(indexFound, 1);
             cart.items.length === 0 ? cart.subTotal = 0 :  cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
@@ -49,19 +54,23 @@ exports.handleItemsInCart = async (req, res) => {
         // update the items in the cart if the items already exist
         }else if(indexFound !== -1){
 
-            if(cart.items[indexFound].quantity > body.quantity)
+            if(body.quantity > cart.items[indexFound].quantity)
             {
-                console.log('item in cart and added it');
-                cart.items[indexFound].quantity = cart.items[indexFound].quantity + body.quantity;
+                //console.log('item quantity greater than cart quantity, therefore added  it');
+                cart.items[indexFound].quantity = cart.items[indexFound].quantity + body.quantity
                 cart.items[indexFound].total = cart.items[indexFound].quantity * productInfo.price;
                 cart.items[indexFound].price = productInfo.price;
                 cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
             }else{
-                console.log('item in cart and removed item and subtracted total');
-                cart.items[indexFound].quantity = cart.items[indexFound].quantity + body.quantity;
+                //console.log('item quantity is less than cart, therefore subtracted it');
+                const quantityToSubtract = cart.items[indexFound].quantity - body.quantity
+                cart.items[indexFound].quantity -= quantityToSubtract;
+
                 cart.items[indexFound].total = cart.items[indexFound].quantity * productInfo.price;
+
                 cart.items[indexFound].price = productInfo.price;
-                cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc - next);
+
+                cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
             }
         
         // quantiy greater than 0, add item that is not the same
@@ -88,10 +97,11 @@ exports.handleItemsInCart = async (req, res) => {
         res.json(savedCartItem);
 
     }else{
-        console.log('no item in cart executed ');
+        //console.log('user and item is not in cart. Create user and item');
         newCartItem = new Cart({
             items: [newItem],
-            subTotal: parseInt(productInfo.price * body.quantity),
+            subTotal: productInfo.price * body.quantity,
+            user,
         })
 
         let savedCart = await newCartItem.save();
@@ -110,24 +120,32 @@ exports.displayCartItems = async (req, res) => {
 
 // when user makes a purchase, has to be logged in
 exports.purchaseItems = async (req, res) => {
-    
-    const body = req.body;
 
     const token = req.token;
 
     const decodedToken = jwt.verify(token, process.env.SECRET); 
 
+    const user = await User.findById(decodedToken.id);  // update purchaseHistory
+ 
+    const cart = await Cart.findOne({user: decodedToken.id}); // get cart and make item and total 0
+
     if(!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });
 
-    // fetch items from cart
-    // if cart is empty, send error 
-    // if cart is not empty, send a response saying made purchase 
-    // delete items in cart
+    //if(body.items.length === 0 || body.subTotal === 0) return res.send({error: "there is nothing in cart"});
 
-    const cart = await getCart();
+    try{
 
-    if(cart.items.length === 0)
-    {
-        return 
+        user.purchaseHistory.push(cart._id);
+        await user.save();
+
+        cart.items = [];
+        cart.subTotal = 0;
+        await cart.save();
+
+        res.status(200).send({message: "successful purchase"});
+    }catch(error){
+        res.status(400).send({error: "could not process"});
     }
+
+
 }

@@ -1,13 +1,13 @@
-POST http://localhost:3002/api/login
+POST http://localhost:3002/user/login
 Content-Type: application/json
 
 {
   "username": "Alexer000",
-  "password": "Alexer"
+  "password": "Alexer000"
 }
 
 ###
-POST http://localhost:3002/api/register
+POST http://localhost:3002/user/register
 Content-Type: application/json
 
 {
@@ -42,7 +42,7 @@ Content-Type: application/json
 
 {
   "productId": "6129abc24c9e6253f8475a0e",
-  "quantity": 2
+  "quantity": 3
 }
 
 ###
@@ -52,4 +52,29 @@ Content-Type: application/json
 {
   "productId": "6129abcd4c9e6253f8475a12",
   "quantity": 3
+}
+
+###
+POST http://localhost:3002/cart/checkout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsZXhlcjAwMCIsImlkIjoiNjEyYWUxM2E4MzZhMmYyMjE4NjA1M2UyIiwiaWF0IjoxNjMwMjA4ODg5fQ.edvf-OX-O5B7eu_eM6ZeZiDTkV-aivoVq1VOERxuJKY
+
+{
+  "subTotal": 17.5,
+  "items": [
+    {
+      "productId": "6129abcd4c9e6253f8475a12",
+      "name": "Orange Soda",
+      "quantity": 3,
+      "price": 3.5,
+      "total": 10.5
+    },
+    {
+      "productId": "6129abc24c9e6253f8475a0e",
+      "name": "Coke",
+      "quantity": 3,
+      "price": 3.5,
+      "total": 7
+    }
+  ]
 }

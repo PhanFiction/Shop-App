@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+const cart = require('../../service/cart');
 
-/**
- * @returns 
- */
 
-/**
- * Todo
- * Add Cart page
- *  1. page should have the name of the item and image 
- *  2. the price based on the quantity of the item
- *  3. 
- */
+/*
+TODO
+1. Display items from the cart
+2. increment/decrement by 1 button for item in cart
+3. remove item from cart button
+*/
 export default function Cart()
 {
+    const [quantity, setQuantity] = useState(0);
+    const [cartItems, setCartItems] = useState(null);
+
+    useEffect(()=> {
+        cart.getCartItems
+        .then(item => setCartItems(item));
+    }, [])
+
     return(
         <div>
             <h1>Cart</h1>

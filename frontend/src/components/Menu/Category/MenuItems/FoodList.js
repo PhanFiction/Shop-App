@@ -33,7 +33,6 @@ export default function Items(props)
     const match = useRouteMatch();
 
     useEffect(()=>{
-
         const fetchData = async (categories) => {
             const category = await food.getCategory(categories);
             setCategory(category);
@@ -41,15 +40,14 @@ export default function Items(props)
         fetchData(props.category)
         
     },[props.category]);
-
-    console.log(items);
+    
 
     return(
         <>
         {/*Category menu items */}
             <Grid container>
                 <Grid item xs={12}>
-                    <ParallaxBG bg={getImage('/images/bg_4')}>
+                    <ParallaxBG bg={getImage('images/bg_4.jpg')}>
                         <Grid container direction="row" justifyContent="center" alignItems="center">
                             <Grid item xs={3}>
                                 <Typography variant="h3">
@@ -64,15 +62,15 @@ export default function Items(props)
         <Grid container justifyContent="center" alignItems="center" className={classes.wrapper}>
                 <Grid container spacing={8}>
                     {
-                    items.length !== 0 ? 
-                    items.meal.map(item => 
-                        <FoodCard key={item.id} foodNameImage={item.imageUrl.slice(0, item.imageUrl.length-4)}>
-                            <Link component={RouterLink} to={`${match.url}/${item.id}`}>
-                                <Typography variant="h4" align="center">{item.name}</Typography>
-                            </Link>
-                        </FoodCard>
-                    ):
-                    <></>
+                        items.length === 0 
+                        ? <></> 
+                        : items.map(item => 
+                            <FoodCard key={item.id} foodNameImage={item.productImage}>
+                                <Link component={RouterLink} to={`${match.url}/${item.id}`}>
+                                    <Typography variant="h4" align="center">{item.name}</Typography>
+                                </Link>
+                            </FoodCard>
+                        )
                     }
                 </Grid>
             </Grid>
