@@ -11,7 +11,8 @@ Things I leanred:
 5. React router 
 
 Things to add in the future
-1. User editing items in the Menu
+1. Allow user to edit items in the Menu
+2. Send an email confirmation to create accounts
 
 
 ![preview](images/1.PNG)
