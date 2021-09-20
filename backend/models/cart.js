@@ -22,6 +22,9 @@ const itemSchema = new mongoose.Schema({
     total: {
         type: Number,
         required: true,
+    },
+    productImage: {
+        type: String,
     }
 },{ _id : false });
 

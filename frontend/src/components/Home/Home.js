@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from 'react-material-ui-carousel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -8,22 +7,26 @@ import CardMedia from '@material-ui/core/CardMedia';
 import AvatarCard from './AvatarCard/AvatarCard';
 import Footer from './Footer/Footer';
 import './home.css';
+import getImage from '../../getImage.js';
 
 const people = [
     {
+        id: 1,
         person: 1,
         url: "http://localhost:3002/images/person_1.jpg",
         message: "Offers a variety of different dishes"
     },
     {
+        id: 2,
         person: 2,
         url: "http://localhost:3002/images/person_2.jpg",
         message: "Dishes are well made and creative"
     },
     {
+        id: 3,
         person: 3,
         url: "http://localhost:3002/images/person_3.jpg",
-        message: "Food offered here is the best. Highly recommend you try this place."
+        message: "Highly recommend you try this place."
     },
 
 ]
@@ -48,19 +51,18 @@ export default function Home()
                         </div>
                     </section>
                 </Grid>
-                <Grid item xs={6}>
-                    <div className="imageBox">
-                        <img className="img1" src="http://localhost:3002/images/bg_2.jpg" alt="bg"/>
-                    </div>
-                </Grid>
-                </Grid>
-                
+                    <Grid item xs={6}>
+                        <div className="imageBox">
+                            <img className="img2" src={getImage("images/bg_2.jpg")} alt="about"/>
+                        </div>
+                    </Grid>
+
                 {/* Second Box */}
                 <Grid container alignItems="center">
                     {/*Image left side*/}
                     <Grid item xs={6}>
                         <div className="imageBox">
-                            <img className="img2" src="http://localhost:3002/images/about.jpg" alt="about"/>
+                            <img className="img2" src={getImage("images/about.jpg")} alt="about"/>
                         </div>
                     </Grid>
                     {/* Text Box containing images and text */}
@@ -79,7 +81,7 @@ export default function Home()
                                 {/* Box of images with names below it*/}
                                 <span className="span-container spaceAround">
                                     <Card className="cardBox">
-                                        <CardMedia image="http://localhost:3002/images/lunch-4.jpg" className="cardMedia"/>
+                                        <CardMedia image={getImage("images/lunch-4.jpg")} className="cardMedia"/>
                                         <CardContent className="cardContent">
                                             <Typography align="center" variant="subtitle1" className="textHover">
                                                 {"Special Kebab"}
@@ -87,7 +89,7 @@ export default function Home()
                                         </CardContent>
                                     </Card>
                                     <Card className="cardBox">
-                                        <CardMedia image="http://localhost:3002/images/lunch-6.jpg" className="cardMedia"/>
+                                        <CardMedia image={getImage("images/lunch-6.jpg")} className="cardMedia"/>
                                         <CardContent>
                                             <Typography align="center" variant="subtitle1" className="textHover">
                                                 {"Special Steak"}
@@ -95,7 +97,7 @@ export default function Home()
                                         </CardContent>
                                     </Card>
                                     <Card className="cardBox">
-                                        <CardMedia image="http://localhost:3002/images/lunch-7.jpg" className="cardMedia"/>
+                                        <CardMedia image={getImage("images/lunch-7.jpg")} className="cardMedia"/>
                                         <CardContent>
                                             <Typography align="center" variant="subtitle1" className="textHover">
                                                 {"Special Wing"}
@@ -149,17 +151,28 @@ export default function Home()
                         </div>
                     </Grid>
                 </Grid>
-            {/*Box 5 Famous dishes */}
-            <Grid container justifyContent="center" alignItems="center">
-                <Grid item xs={6}>
-                    <div className="userBox">
-                        <Typography variant="h4" align="center">
-                            {"User Reviews"} 
-                        </Typography>
-                        <Carousel navButtonsAlwaysInvisible>
-                            {people.map((item, i) => <AvatarCard key={i} item={item}/>)}
-                        </Carousel>
-                    </div>
+                {/*Box 5 Famous dishes */}
+                <Grid container justifyContent="center" alignItems="center" direction="column">
+                    <Grid item xs={6}>
+                        <div className="userBox">
+                            <Typography variant="h4" align="center">
+                                {"User Reviews"} 
+                            </Typography>
+                        </div>
+                    </Grid>
+                
+                    
+                        <Grid container direction="row" justifyContent="center" alignItems="center">
+                            {
+                                people.map(p => 
+                                <Grid  key={p.id}  item xs={12} md={3} lg={3}>
+                                    <AvatarCard item={p}/>
+                                </Grid>
+                                )
+                            }
+                        </Grid>
+                    
+                    
                 </Grid>
             </Grid>
             

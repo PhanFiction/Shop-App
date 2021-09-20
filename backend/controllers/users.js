@@ -84,7 +84,6 @@ exports.updateUser = async(req, res) => {
     res.json(updateUser);
 }
 
-
 // login
 exports.login = async(req, res) => {
     const body = req.body;
@@ -114,5 +113,5 @@ exports.login = async(req, res) => {
 
     res
         .status(200)
-        .send({token, username: user.username, name: user.name});
+        .send({token, username: user.username, name: user.name})
 }

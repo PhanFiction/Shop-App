@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Form from '../../../Button/Form.js';
 import food from '../../../../service/food.js';
-import cart from '../../../../service/cart.js';
 import { useParams, useRouteMatch } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core';
 import getImage from '../../../../getImage.js';
-
+import authService from '../../../../service/authorization.js';
 const useStyles = makeStyles({
     center: {
         marginTop: "10%",
@@ -40,30 +39,53 @@ const useStyles = makeStyles({
 })
 
 // need to pass in an ID to get a specific item. 
-export default function Food()
+export default function Food({user, setCart})
 {
     const classes = useStyles();
     const params = useParams();
     const categoryPath = useRouteMatch();
     const categoryType = categoryPath.path.slice(6, categoryPath.path.length-4);
 
-    const [item, setItem] = useState('');
+    const [item, setItem] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    
 
     // Load item id 
     useEffect(()=>{
-        food.getFoodID(categoryType, params.id)
-        .then(data => setItem(data));
-    },[categoryType, categoryPath, params.id])
 
-    if(item.length === 0) return(<></>);
+        const getFood = async () => {
+            const item = await food.getFoodID(categoryType, params.id);
+            setItem(item);
+        }
+        getFood();
+    },[])
 
-    // submit to the cart
-    const handleSubmit = (event) => {
+    if(item === null)
+    {
+        return(
+            <></>
+        )
+    }
+
+    // add item to the cart
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        console.log('click');
-        return null;
+
+        const cartObj = {
+            productId: params.id,
+            quantity: quantity,
+        }
+
+        if(user !== null)
+        {
+            try{
+                await authService.handleItemsInCart(cartObj);
+                const cart = await authService.getCartItems();
+                setCart(cart);
+                alert('added item to cart');
+            }catch(error){
+                alert('could not add to cart');
+            }
+        }
     }
 
     // change value
@@ -81,8 +103,7 @@ export default function Food()
                         <Grid item xs={12} sm={12} md={6}>
                             <Card>
                                 <CardContent className={`${classes.card}`}>
-                                    <CardMedia image={getImage(item.productImage)} className={classes.media}>                                       
-                                    </CardMedia>
+                                    <CardMedia image={getImage(item.productImage)} className={classes.media}/>                                       
                                 </CardContent>
                             </Card>
                         </Grid>
