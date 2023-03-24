@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import ParallaxBG from './parallax/Parallax.js';
-import getImage from '../../getImage.js';
+import ParallaxBG from '../parallax/Parallax.js';
+import getImage from '../../service/getImage.js';
 import Typography from '@material-ui/core/Typography';
 import FoodCard from './Category/FoodCard.js';
 import { makeStyles } from '@material-ui/core';

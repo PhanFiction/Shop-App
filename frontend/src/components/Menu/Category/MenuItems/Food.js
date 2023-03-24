@@ -8,8 +8,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core';
-import getImage from '../../../../getImage.js';
+import getImage from '../../../../service/getImage.js';
 import authService from '../../../../service/authorization.js';
+
 const useStyles = makeStyles({
     center: {
         marginTop: "10%",

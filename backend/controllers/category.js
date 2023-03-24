@@ -48,20 +48,12 @@ exports.getFood = async(req, res) => {
 // if user is logged in, they can edit, add, delete, product from the database.
 exports.postItem = async (req, res) => {
     const body = req.body;
-
     let filePath = undefined;
 
     req.file === undefined ? filePath : filePath=req.file.path; // file path uknownn handler
 
     const token = req.token; // extract token from body;
-    
     const decodedToken = jwt.verify(token, process.env.SECRET); // verify token
-
-/*     const decodedToken = jwt.verify(token, process.env.SECRET, (error, decoded) => {
-        error ? res.status(400).send({error: error}) : console.log(decoded);
-
-        // token substring was off
-    }); */
 
     if (!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });
 
@@ -83,11 +75,8 @@ exports.postItem = async (req, res) => {
 
 // update price, description, category, picture
 exports.updateItem = async(req, res) => {
-
     const body = req.body;
-
     const token = req.token;
-    
     const decodedToken = jwt.verify(token, process.env.SECRET); 
 
     if (!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });
@@ -107,9 +96,7 @@ exports.updateItem = async(req, res) => {
 // remove product item from page if they have authorization
 exports.deleteItem = async(req, res) => {
     const id = req.params.id;
-
     const token = req.token;
-    
     const decodedToken = jwt.verify(token, process.env.SECRET); 
 
     if(!token || !decodedToken.id) return res.status(401).send({ error: 'token missing or invalid' });

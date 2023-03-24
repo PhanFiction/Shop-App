@@ -3,29 +3,19 @@ const Food = require('../models/food.js');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 
-
 // add to cart and handles subtracting items from cart
 // contains only two items in the cart array. The subtotal and the items array which holds the object of items
 exports.handleItemsInCart = async (req, res) => {
     const token = req.token;
-
     const decodedToken = jwt.verify(token, process.env.SECRET); 
-
     const id = await User.findById(decodedToken.id);  
-
     const user = await User.findById(id);
- 
     const body = req.body;
-
     const cart = await Cart.findOne({user});
-    
 
     let productInfo = await Food.findById(body.productId)// get product info
-    //console.log(body.productId);
 
     if(!productInfo) return res.status(500).send({type: "not found", message: "invalid request"});
-    //console.log('body info', productInfo);
-    //console.log(req.body);
 
     let newCartItem = null;
 

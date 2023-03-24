@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import {Redirect} from 'react-router-dom';
-import CartItem from './Card/CartItem';
+import CartItem from './CartItem.js';
 import { makeStyles } from '@material-ui/core';
 import authService from '../../service/authorization.js';
 import Button from '@material-ui/core/Button';

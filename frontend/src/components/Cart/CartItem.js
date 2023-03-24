@@ -4,12 +4,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import getImage from '../../../getImage.js';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core';
+import getImage from '../../service/getImage.js';
 
 
 const styles = makeStyles({

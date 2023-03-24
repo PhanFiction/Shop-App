@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:root {
+  --text-padding: 2rem;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +11,7 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 img {

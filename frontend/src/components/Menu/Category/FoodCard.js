@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
-import getImage from '../../../getImage.js';
+import getImage from '../../../service/getImage';
 
 import { makeStyles } from '@material-ui/core';
 

@@ -2,15 +2,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user.js');
 
-
 //extract bearer token from request of user
 const tokenExtractor = (req) => {
-    if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'bearer') 
-    {
+    if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'bearer') {
         return req.headers.authorization.split(' ')[1];
-
     }else if (req.query && req.query.token){
-
         return req.query.token;
     }
     return null;
