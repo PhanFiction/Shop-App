@@ -4,7 +4,7 @@ import {Link as routerlink} from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import StoreAvatar from '@material-ui/icons/Store';
 
-export default function MenuIcon()
+export default function StoreIcon()
 {
     return(
         <Link component={routerlink} to={"/menu"} color='textPrimary' place="Menu">

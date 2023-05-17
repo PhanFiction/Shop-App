@@ -19,8 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileIcon({user, setUser}) 
-{
+export default function ProfileIcon({user, setUser, userId, setUserId}) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,17 +40,11 @@ export default function ProfileIcon({user, setUser})
   const handleSignout = () => {
     window.localStorage.removeItem("loggedUser");
     setUser(null);
+    setUserId(null);
     refreshPage();
     return (
       <Redirect to="/"/>
     )
-  }
-
-  const handleRoute = (path) => {
-    const editItems = () => (<Link component={RouterLink} to={"/productItems"} color='textPrimary'/>);
-    const myAccount = () => (<Link component={RouterLink} to={"/user/editAccount"} color='textPrimary'/>);
-    
-    path === "editItems" ? editItems() : myAccount();
   }
 
   return (
@@ -83,8 +76,9 @@ export default function ProfileIcon({user, setUser})
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={()=>{handleRoute("editItems")}}> Edit items </MenuItem>
-            <MenuItem onClick={()=>{handleRoute("myAccount")}}> My account </MenuItem>
+            <Link component={RouterLink} to={`/user/${userId}`} color='textPrimary'>
+              My account
+            </Link>
             <MenuItem onClick={handleSignout}> Sign out </MenuItem>
           </Menu>
         </div>

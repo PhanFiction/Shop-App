@@ -1,4 +1,5 @@
 .navbar {
+  display: flex;
   align-items: center;
 }
 
@@ -15,4 +16,21 @@
 .MuiLink-root {
   margin-left: 1em !important;
   margin-right: 1em !important;
+}
+
+.hamburger {
+  display: flex;
+  gap: 3px;
+  flex-direction: column;
+}
+
+.hamburger > div {
+  content: '';
+  width: 20px;
+  height: 3px;
+  background-color: black;
+}
+
+.bg {
+  background-color: black !important;
 }

@@ -19,7 +19,6 @@ export default function Cart({user, cart})
     const cartStyles = styles();
     const [cartItems, setItems] = React.useState(cart.items);
     const [subTotal, setPrice] = React.useState(cart.subTotal);
- 
 
     if(user === null) return (<Redirect to={"/user/login"}/>)
     if(cart === null || cart === undefined)
@@ -56,7 +55,6 @@ export default function Cart({user, cart})
         
         // save to db
         authService.handleItemsInCart(cartItem);
-        
     }
 
     const addItem = async (id) => {
