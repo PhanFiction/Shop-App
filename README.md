@@ -1,7 +1,7 @@
 # Shop-App
 Crud Application using MongoDB, Material UI, Reactjs, Expressjs
 
-Not the best looking project, but it was my first MERN app for a shopping cart where I learned to use backend and frontend.
+Website where the user can add items to the cart and purchase them
 
 Things I leanred: 
 1. Material Ui
