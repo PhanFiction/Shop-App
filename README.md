@@ -1,19 +1,14 @@
-# Shop-App
-Crud Application using MongoDB, Material UI, Reactjs, Expressjs
+# Kisune Shop
 
-Website where the user can add items to the cart and purchase them
+Cafe website where user's can add items to the cart and make a purchase
 
-Things I leanred: 
-1. Material Ui
-2. JWT token 
-3. Creating a login page and sign up page  
-4. Storing username and password into window.localStorage
-5. React router 
-
-Things to add in the future
-1. Allow user to edit items in the Menu
-2. Send an email confirmation to create accounts
-3. Allow user to edit profile (change username or password)
+Created using 
+1. Material UI
+2. React for frontend
+3. Express for backend
+4. MongoDB to store user credentials
+5. JWT Token
+6. React Router
 
 
 ![preview](images/1.PNG)
