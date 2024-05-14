@@ -47,7 +47,7 @@ export default function Navbar({user, setUser, userId, setUserId}) {
       <>
       <AppBar position="sticky">
         <Container maxWidth="xl">
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
               <Button
                 size="large"
                 aria-label="account of current user"
@@ -82,7 +82,7 @@ export default function Navbar({user, setUser, userId, setUserId}) {
                 ))}
               </Menu>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'}, justifyContent: 'right'}}>
               <Breadcrumbs separator="|">
                 <HomeIcon/>
                 <StoreIcon/>
